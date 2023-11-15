@@ -36,7 +36,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   }
 
   void playMusic() async {
-    var url = 'http://localhost:8080';
+    var url = 'http://localhost:8080/beepstream';
     await _player.setUrl(url);
     _player.play();
     _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
@@ -46,8 +46,8 @@ class _MusicPlayerState extends State<MusicPlayer> {
   }
 
   void stopMusic() {
+    _timer?.cancel(); // Cancel the timer first
     _player.stop();
-    _timer?.cancel();
   }
 
   @override
