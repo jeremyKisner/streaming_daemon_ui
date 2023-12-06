@@ -31,6 +31,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   Duration? _duration;
   Duration? _position;
   bool _isLoading = false;
+  double _currentSliderValue = 0;
 
   @override
   void dispose() {
@@ -80,7 +81,20 @@ class _MusicPlayerState extends State<MusicPlayer> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Slider(
+          value: _currentSliderValue,
+          min: 0,
+          max: 100,
+          divisions: 100,
+          label: _currentSliderValue.round().toString(),
+          onChanged: (double value) {
+            setState(() {
+              _currentSliderValue = value;
+            });
+          },
+        ),
         ElevatedButton(
           child: Text('Play'),
           onPressed: playMusic,
